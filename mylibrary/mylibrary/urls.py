@@ -16,4 +16,6 @@ urlpatterns = [
 
     url(r'^old/book-detail-by-id/(?P<pk>[-\w]+)',
         old_views.get_book),
+    url(r'^old/book-update/(?P<pk>[-\w]+)',
+        old_views.edit_book),
 ]
