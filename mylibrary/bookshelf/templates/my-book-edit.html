@@ -1,0 +1,13 @@
+<h1>This is a book update form</h1>
+
+    <div>
+      <form id='edit-form'
+            action='/book-update/{{ object.pk }}/'
+            method='post'> {% csrf_token%}
+        {{ form }}
+      <br/>
+      <br/>
+        <input type='submit' name='upload' value='Editar'/>
+      </form>
+    </div>
+
