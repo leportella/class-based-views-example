@@ -1,8 +1,35 @@
 from django.http import Http404
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 
 from .forms import BookForm
 from .models import Book
+
+
+def welcome(request):
+    return render(request, 'welcome.html')
+
+
+def get_books_list(request):
+    books = Book.objects.all()
+    return render(request, 'my-books.html', {'object_list': books})
+
+
+def get_book_by_id(request, pk):
+    if request.method == 'GET':
+        try:
+            book = Book.objects.get(id=pk)
+        except Book.DoesNotExist:
+            raise Http404("Book does not exist")
+        return render(request, 'my-book-detail.html', {'object': book})
+
+
+def get_book_by_code(request, code):
+    if request.method == 'GET':
+        try:
+            book = Book.objects.get(code=code)
+        except Book.DoesNotExist:
+            raise Http404("Book does not exist")
+            return render(request, 'my-book-detail.html', {'object': book})
 
 
 def edit_book(request, pk):
@@ -12,19 +39,11 @@ def edit_book(request, pk):
         raise Http404("Book does not exist")
 
     if request.method == 'GET':
-        return render(request, 'my-book-edit.html')
+        return render(request, 'my-book-edit.html', {'form': BookForm, 'object': book})
 
     if request.method == 'POST':
         form = BookForm(request.POST)
         if form.is_valid():
-            print('oi')
-        raise form.errors
+            form.save()
+        return redirect('/old/my-books')
 
-
-def get_book(request, pk):
-    if request.method == 'GET':
-        try:
-            book = Book.objects.get(id=pk)
-        except Book.DoesNotExist:
-            raise Http404("Book does not exist")
-        return render(request, 'my-book-detail.html', {object: book})
