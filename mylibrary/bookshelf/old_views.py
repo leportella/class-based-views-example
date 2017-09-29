@@ -39,10 +39,12 @@ def edit_book(request, pk):
         raise Http404("Book does not exist")
 
     if request.method == 'GET':
-        return render(request, 'my-book-edit.html', {'form': BookForm, 'object': book})
+        form = BookForm(instance=book)
+        return render(request, 'my-book-edit.html', {'form': form, 'object': book})
 
     if request.method == 'POST':
-        form = BookForm(request.POST)
+        book = Book.objects.get(id=pk)
+        form = BookForm(request.POST, instance=book)
         if form.is_valid():
             form.save()
         return redirect('/old/my-books')

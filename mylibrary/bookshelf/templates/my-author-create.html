@@ -1,14 +1,13 @@
-<h1>This is a book update form</h1>
+<h1>This is a author create form</h1>
 
     <div>
-      <form id="edit-form"
+      <form id="create-form"
             action=""
             method="post">
         {% csrf_token %}
         {{ form }}
       <br/>
       <br/>
-        <input type='submit' name='upload' value='Editar'/>
+        <input type='submit' name='upload' value='Salvar'/>
       </form>
     </div>
-
