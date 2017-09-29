@@ -2,7 +2,7 @@
 
 <ul>
 {% for book in object_list %}
-    <li>{{ book.title }} - {{ book.author.name }}</li>
+    <li>{{ book }}</li>
 {% empty %}
     <li>No books yet.</li>
 {% endfor %}

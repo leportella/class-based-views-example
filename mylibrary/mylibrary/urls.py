@@ -12,7 +12,9 @@ urlpatterns = [
         views.BookDetailByIdView.as_view()),
     url(r'^book-detail-by-code/(?P<code>[-\w]+)',
         views.BookDetailByCodeView.as_view()),
-    url(r'^book-update/(?P<pk>[-\w]+)', views.BookUpdateView.as_view()),
+    url(r'^book-update/(?P<pk>[-\w]+)$', views.BookUpdateView.as_view()),
+    url(r'^book-create$', views.BookCreateView.as_view()), 
+    url(r'^author-create$', views.AuthorCreateView.as_view()),   
 
     url(r'^old/welcome/', old_views.welcome),
     url(r'^old/my-books/', old_views.get_books_list),
