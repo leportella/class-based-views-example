@@ -9,7 +9,7 @@ class Author(models.Model):
 
 
 class Book(models.Model):
-    author = models.ForeignKey(Author)
+    author = models.ForeignKey(Author, on_delete=models.CASCADE)
     title = models.CharField(max_length=250)
     pages = models.IntegerField()
     code = models.IntegerField()
